@@ -17,7 +17,7 @@ function Authors() {
   return (
     <div className={styles.container}>
       {authors.map((author) => (
-        <Author author={author} />
+        <Author key={author} author={author} />
       ))}
     </div>
   );
