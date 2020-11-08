@@ -5,7 +5,12 @@ import Author from 'components/author/author';
 
 import styles from './authors.module.css';
 
-function Authors() {
+type TProps = {
+  activeAuthor: string;
+  onClickHandler: React.MouseEventHandler<HTMLDivElement>;
+};
+
+function Authors({ activeAuthor, onClickHandler }: TProps) {
   const [authors, setAuthors] = useState([] as string[]);
 
   useEffect(() => {
@@ -15,9 +20,13 @@ function Authors() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={onClickHandler}>
       {authors.map((author) => (
-        <Author key={author} author={author} />
+        <Author
+          key={author}
+          author={author}
+          isActive={author === activeAuthor}
+        />
       ))}
     </div>
   );

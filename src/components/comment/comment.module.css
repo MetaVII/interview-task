@@ -4,9 +4,15 @@
   border-radius: 8px;
   padding: 10px;
 }
+
 .author {
   display: block;
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.active {
+  background-color: #175fc0;
+  color: #ffffff;
 }

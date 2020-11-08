@@ -6,7 +6,7 @@ import type { TComments } from 'types';
 
 import styles from './comments.module.css';
 
-function getThreads(comments: TComments) {
+function getThreads(comments: TComments, activeAuthor: string) {
   if (comments.length === 0) {
     return null;
   }
@@ -16,8 +16,12 @@ function getThreads(comments: TComments) {
         const { author, message } = comment;
         return (
           <div key={author + message}>
-            <Comment author={author} message={message} />
-            {getThreads(comment.comments)}
+            <Comment
+              author={author}
+              message={message}
+              isActive={author === activeAuthor}
+            />
+            {getThreads(comment.comments, activeAuthor)}
           </div>
         );
       })}
@@ -25,14 +29,18 @@ function getThreads(comments: TComments) {
   );
 }
 
-function Comments() {
+type TProps = {
+  activeAuthor: string;
+};
+
+function Comments({ activeAuthor }: TProps) {
   const [comments, setComments] = useState([] as TComments);
 
   useEffect(() => {
     setComments(commentsData);
   }, []);
 
-  return getThreads(comments);
+  return getThreads(comments, activeAuthor);
 }
 
 export default Comments;
